@@ -1,0 +1,45 @@
+body {
+  background-color: #f9f9f9;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.WARNING, .FAIL {
+  background-color: white;
+  padding: 10px;
+  margin: 5%;
+}
+
+.WARNING h1 {
+  color: #f1c40f;
+  text-align: center;
+  font-weight: 800;
+}
+
+.WARNING p {
+  border-left: 2px solid #f1c40f;
+  font-weight:lighter;
+  padding-left: 10px;
+}
+
+.WARNING p i {
+  display: block;
+  color: gray;
+}
+
+
+.FAIL h1 {
+  color: #e74c3c;
+  text-align: center;
+  font-weight: 800;
+}
+
+.FAIL p {
+  border-left: 2px solid #e74c3c;
+  font-weight:lighter;
+  padding-left: 10px;
+}
+
+.FAIL p i {
+  display: block;
+  color: gray;
+}
