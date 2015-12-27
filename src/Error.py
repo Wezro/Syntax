@@ -1,10 +1,11 @@
 #This is used for outputting errors to the user.
 
-errors = []
 
 ERROR_FILE = open("../error.html","w")
 ERROR_HEADER = open("res/error_header.html","r").read()
 LEVELS = ["WARNING","FAIL"]
+
+errors = []
 
 def processError(level,line,title,message):
     errors.append([level,line,title,message])
