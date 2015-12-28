@@ -52,13 +52,6 @@ def processObject(string):
     if (len(elements) > 0):
         elements[element]["children"].append(string)
 
-
-
-
-
-    print "---------------------------------"
-    print elements
-
     prevString  = string
 
 
