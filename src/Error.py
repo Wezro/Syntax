@@ -2,7 +2,7 @@
 
 
 ERROR_FILE = open("../error.html","w")
-ERROR_HEADER = open("res/error_header.html","r").read()
+ERROR_HEADER = open("../res/error_header.html","r").read()
 LEVELS = ["WARNING","FAIL"]
 
 errors = []

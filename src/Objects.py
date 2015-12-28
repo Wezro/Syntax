@@ -13,28 +13,51 @@ outputFile = open("../example.css","w")
 elements = []
 prevName = []
 
+element = None
+
+
+#processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
 def processObject(string):
     global prevString
     global prevName
     global elements
-
+    global element
     currentIndentation = indentation(string)
     prevIndentation = indentation(prevString)
-    element = 0
 
-    if (currentIndentation > prevIndentation): # This means the previous one was a parent.
-        elements.append({"name": ' '.join(prevName) + prevString,"children":[]})
-        element = lastIndex(elements) # Make element "point" to the last index in the list elements.
-        elements[element]["children"].append(string) # Add the current string to the current element
-        prevName.append(prevString) #Add the name to the list of previous names.
 
-    elif (currentIndentation < prevIndentation): # This means we are going down a parent.
-        element -= prevIndentation - currentIndentation
-        prevName = listRemove(prevIndentation-currentIndentation,prevName)
-        elements[element]["children"].append(string) # Add the current string to the current element
+    if (currentIndentation > prevIndentation): #Previous one must be a parent.
 
-    else:
-        elements[element]["children"].append(string) # Add the current string to the current element
+        if (element == None):
+            element = 0
+
+        elif (element == 0):
+            prevName.append(prevString)
+            elements.append({"name": " ".join(prevName), "children":[]})
+            element = lastIndex(elements)
+
+        elif (element != 0):
+            prevName.append(prevString)
+            elements[element]["children"] = listRemove(1,elements[element]["children"])
+            elements.append({"name": " ".join(prevName), "children":[]})
+            element = lastIndex(elements)
+
+
+    elif (currentIndentation < prevIndentation): # This means we are not a child of the previous parent(s).
+        # Remove the previous parent(s)
+        element -= prevIndentation-currentIndentation
+        for i in 0,prevIndentation-currentIndentation:
+            prevName.pop()
+
+    if (len(elements) > 0):
+        elements[element]["children"].append(string)
+
+
+
+
+
+    print "---------------------------------"
+    print elements
 
     prevString  = string
 
@@ -49,7 +72,7 @@ def indentation(string): # Returns the number of intentions in a string
     return len(string) - len(string.lstrip())
 
 def strip(string): # Strips indents and linebreaks from a string.
-    return string.strip("\t").strip("\n")
+    return string.lstrip().strip("\n").strip(" ")
 
 def listRemove(amount,list): # Removes (n) amount of items from a list, starting from the end.
-    return list[:amount-1]
+    return list[:-amount]
