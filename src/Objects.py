@@ -6,9 +6,6 @@ import Error
 
 prevString = ""
 currentString = ""
-var = ""
-tok = ""
-outputFile = open("../example.css","w")
 
 elements = []
 prevName = []
