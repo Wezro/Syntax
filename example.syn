@@ -1,8 +1,6 @@
 @var:15px
 @vara:20px
 @var:@vara
-
-
 	body
 		background-color: @var
 		width: 100px

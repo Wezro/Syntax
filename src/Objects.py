@@ -16,8 +16,8 @@ prevName = []
 element = None
 
 
-#processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
-def processObject(string):
+# process parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
+def process(string):
     global prevString
     global prevName
     global elements
@@ -26,34 +26,32 @@ def processObject(string):
     prevIndentation = indentation(prevString)
 
 
-    if (currentIndentation > prevIndentation): #Previous one must be a parent.
+    if (currentIndentation > prevIndentation): # Previous one must be a parent.
 
-        if (element == None):
+
+        if (element == None): # Make sure the parent isn't fake.
             element = 0
 
-        elif (element == 0):
+        elif (element == 0): # If this is the first one, there won't be any elements to delete.
             prevName.append(prevString)
             elements.append({"name": " ".join(prevName), "children":[]})
             element = lastIndex(elements)
 
         elif (element != 0):
             prevName.append(prevString)
-            elements[element]["children"] = listRemove(1,elements[element]["children"])
+            elements[element]["children"] = listRemove(1,elements[element]["children"]) # Delete this parent from the children of the previous parent.
             elements.append({"name": " ".join(prevName), "children":[]})
             element = lastIndex(elements)
 
 
     elif (currentIndentation < prevIndentation): # This means we are not a child of the previous parent(s).
-        # Remove the previous parent(s)
+        # Remove the previous parent(s), and go down a certain amount of elements
         element -= prevIndentation-currentIndentation
         for i in 0,prevIndentation-currentIndentation:
             prevName.pop()
 
     if (len(elements) > 0):
         elements[element]["children"].append(string)
-
-
-
 
 
     print "---------------------------------"
