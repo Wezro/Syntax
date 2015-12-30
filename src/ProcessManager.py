@@ -8,4 +8,4 @@ def process(string):
     if string[0] == "@":
         Variable.process(string)
     elif string[0] != "" or string[0] != "\n":
-        Objects.processObject(string)
+        Objects.process(string)

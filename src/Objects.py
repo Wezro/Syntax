@@ -16,7 +16,7 @@ prevName = []
 element = None
 
 
-# process parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
+# processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
 def process(string):
     global prevString
     global prevName
