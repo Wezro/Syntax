@@ -11,3 +11,6 @@
 		backround: @var
 		p
 			color: red
+
+	body
+		color: red

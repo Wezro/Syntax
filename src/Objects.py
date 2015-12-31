@@ -6,8 +6,6 @@ import Error
 
 prevString = ""
 currentString = ""
-var = ""
-tok = ""
 outputFile = open("../example.css","w")
 
 elements = []
@@ -26,22 +24,19 @@ def process(string):
     prevIndentation = indentation(prevString)
 
 
+
     if (currentIndentation > prevIndentation): # Previous one must be a parent.
+        if (element == None):
+            element = -1
 
-
-        if (element == None): # Make sure the parent isn't fake.
-            element = 0
-
-        elif (element == 0): # If this is the first one, there won't be any elements to delete.
+        else:
             prevName.append(prevString)
+            if (element >= 0):
+                elements[element]["children"] = listRemove(1,elements[element]["children"]) # Delete this parent from the children of the previous parent.
+
             elements.append({"name": " ".join(prevName), "children":[]})
             element = lastIndex(elements)
 
-        elif (element != 0):
-            prevName.append(prevString)
-            elements[element]["children"] = listRemove(1,elements[element]["children"]) # Delete this parent from the children of the previous parent.
-            elements.append({"name": " ".join(prevName), "children":[]})
-            element = lastIndex(elements)
 
 
     elif (currentIndentation < prevIndentation): # This means we are not a child of the previous parent(s).
@@ -50,18 +45,39 @@ def process(string):
         for i in 0,prevIndentation-currentIndentation:
             prevName.pop()
 
-    if (len(elements) > 0):
+
+    if (len(elements) > 0): # With the way this system works, we have to add every real line to the children of the previous element.
         elements[element]["children"].append(string)
 
 
-    print "---------------------------------"
-    print elements
+    #print "---------------------------------"
+    #print elements
 
     prevString  = string
 
+# Exports the elements to a CSS file
+def export(cssPath):
+    cssFile = open(cssPath,"w")
+    for element in elements:
+        cssFile.write(element["name"] + "{")
+
+        for child in element["children"]:
+            cssFile.write(child + ";")
+
+        cssFile.write("}")
+    cssFile.close()
 
 
-#------ Tidbits ------#
+
+#------ Tidbits ------#z
+def combineList(sourceList):
+    for sourceIndex, sourceElement in enumerate(sourceList, start=0):
+        for copyIndex, copyElement in enumerate(sourceList, start=0):
+            if sourceElement["name"] == copyElement["name"]:
+                sourceList[sourceIndex]["children"] += sourceList[copyIndex]["children"]
+                sourceList.pop(copyIndex)
+
+    return sourceList
 
 def lastIndex(list): # Returns the last index of a given list.
     return len(list)-1
