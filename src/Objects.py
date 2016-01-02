@@ -4,26 +4,34 @@
 import Variable
 import Error
 
-prevString = ""
-currentString = ""
+
 outputFile = open("../example.css","w")
 
-elements = []
-prevName = []
 
-element = None
 
 
 # processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
+
+def init(): #This is caled to reinitalise the variables before each process.
+    global prevString
+    global prevName
+    global elements
+    global element
+
+    prevString = ""
+    currentString = ""
+    elements = []
+    prevName = []
+    element = None
+
 def process(string):
     global prevString
     global prevName
     global elements
     global element
+
     currentIndentation = indentation(string)
     prevIndentation = indentation(prevString)
-
-
 
     if (currentIndentation > prevIndentation): # Previous one must be a parent.
         if (element == None):
@@ -31,9 +39,8 @@ def process(string):
 
         else:
             prevName.append(prevString)
-            if (element >= 0):
+            if (len(elements) > 0):
                 elements[element]["children"] = listRemove(1,elements[element]["children"]) # Delete this parent from the children of the previous parent.
-
             elements.append({"name": " ".join(prevName), "children":[]})
             element = lastIndex(elements)
 
