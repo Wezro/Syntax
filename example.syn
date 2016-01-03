@@ -10,4 +10,4 @@
 	.class
 		backround: @var
 		p
-			color: red
+			color: green
