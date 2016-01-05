@@ -5,13 +5,8 @@ import Variable
 import Error
 
 
-outputFile = open("../example.css","w")
-
-
-
 
 # processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
-
 def init(): #This is caled to reinitalise the variables before each process.
     global prevString
     global prevName
