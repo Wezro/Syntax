@@ -5,6 +5,7 @@ import Variable
 import Error
 
 
+<<<<<<< HEAD
 # processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
 
 global prevString
@@ -18,6 +19,10 @@ elements = []
 prevName = []
 element = -1
 
+=======
+
+# processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
+>>>>>>> 7e840afaeed852307163ed79935079d5a3ccc07c
 def init(): #This is caled to reinitalise the variables before each process.
     global prevString
     global prevName
