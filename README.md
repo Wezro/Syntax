@@ -10,7 +10,7 @@ To use Syntax, you first need to tell Syntax what directory to use. To do this, 
 After this, you can start listening for changes in that directory, type `watch`. Then Syntax will now start looking for .syn/.syntax files, and will create or modify their CSS counterparts.
 
 
-##Example Syntax File
+##Example File
 
 ```
 @myVariable: 10%
