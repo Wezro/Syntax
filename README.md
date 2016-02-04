@@ -5,6 +5,18 @@ Syntax is an in-development command-line utility to make writing CSS easier. Syn
 
 ##Usage
 
-To use Syntax, you first need to tell it what directory to use. To do this, enter `dir [directory]`.
+To use Syntax, you first need to tell Syntax what directory to use. To do this, type `dir [directory]`.
 
-To start listening for changes in that directory, type `watch`. Then Syntax will now start looking for .syn/.syntax files, and creating or modifying their CSS counterparts. 
+After this, you can start listening for changes in that directory, type `watch`. Then Syntax will now start looking for .syn/.syntax files, and will create or modify their CSS counterparts.
+
+
+##Example Syntax File
+
+```
+@myVariable: 10%
+
+body
+  padding: @mayVariable
+  p
+    font-size: @myVariable
+```
