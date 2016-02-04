@@ -1,13 +1,14 @@
 @var:15px
 @vara:20px
 @var:@vara
-	body
-		background-color: @var
-		width: 100px
-		a
-			background-color: 50px
-			color: @var
-	.class
-		backround: @var
-		p
-			color: green
+@test:1px
+body
+	background-color: @var
+	width: 100px
+	a
+		background-color: 50px
+		color: @var
+.class
+	backround: @var
+	p
+		color: orange
