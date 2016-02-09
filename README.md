@@ -19,7 +19,7 @@ After this, you can start listening for changes in that directory, type `watch`.
 @myVariable: 10%
 
 body
-  padding: @mayVariable
+  padding: @myVariable
   p
     font-size: @myVariable
 ```
