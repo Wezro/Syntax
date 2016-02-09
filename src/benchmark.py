@@ -10,7 +10,6 @@ def execute(fileName):
             else:
                 ProcessManager.process(line)
 
-    #Objects.elements = Objects.combineList(Objects.elements) # This makes sure if there are any duplicates elements, they are combined.
     Objects.export(fileName.replace(".syntax","").replace(".syn","") + ".css")
     syntaxLines.close()
 
