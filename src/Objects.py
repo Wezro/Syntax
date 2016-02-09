@@ -5,7 +5,6 @@ import Variable
 import Error
 
 
-<<<<<<< HEAD
 # processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
 
 global prevString
@@ -19,10 +18,9 @@ elements = []
 prevName = []
 element = -1
 
-=======
+
 
 # processObject parses .syn file contents into a list. The parameter string is one of the lines from the .syn file
->>>>>>> 7e840afaeed852307163ed79935079d5a3ccc07c
 def init(): #This is caled to reinitalise the variables before each process.
     global prevString
     global prevName
@@ -68,13 +66,22 @@ def process(string):
 
 
     if (len(elements) > 0): # With the way this parser works, we have to add every line to the children of the previous element.
+        if Variable.processVariable(string)[0] != None and Variable.processVariable(string)[1] != None:
+            var, tok = Variable.processVariable(string)
+            tok = list(tok)
+            string = (var + ":" + tok[0])
+            if tok[1] != None: # A lot of variables don't have an extension, so lets see if it does.
+                string += tok[1]
+
         elements[element]["children"].append(string)
 
     prevString  = string # At the end of each cycle, this sets the previous string
 
 # Exports the elements to a CSS file
 def export(cssPath):
+    global elements
     cssFile = open(cssPath,"w")
+    elements = compressList(elements)
     for element in elements: # Go through each element, which is the parents.
         cssFile.write(element["name"] + "{") # Write the parent, followed by a { bracket
 
@@ -96,6 +103,12 @@ def combineList(sourceList):
 
     return sourceList
 
+def compressList(sourceList):
+    for parentIndex, parent in enumerate(sourceList):
+        sourceList[parentIndex]["name"] = strip(parent["name"])
+        for childIndex, child in enumerate(parent["children"]):
+            sourceList[parentIndex]["children"][childIndex] = strip(child)
+    return sourceList
 
 def lastIndex(list): # Returns the last index of a given list.
     return len(list)-1

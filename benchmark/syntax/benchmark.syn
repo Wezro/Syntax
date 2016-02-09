@@ -1,0 +1,12 @@
+@font-stack: Helvetica, sans-serif
+@primary-color: #333
+body
+	font: @font-stack
+	color: @primary-color
+h1
+	color: @primary-color
+	font: @font-stack
+b
+	color: @primary-color
+h2 
+	color: @primary-color
