@@ -66,13 +66,6 @@ def process(string):
 
 
     if (len(elements) > 0): # With the way this parser works, we have to add every line to the children of the previous element.
-        if Variable.processVariable(string)[0] != None and Variable.processVariable(string)[1] != None:
-            var, tok = Variable.processVariable(string)
-            tok = list(tok)
-            string = (var + ":" + tok[0])
-            if tok[1] != None: # A lot of variables don't have an extension, so lets see if it does.
-                string += tok[1]
-
         elements[element]["children"].append(string)
 
     prevString  = string # At the end of each cycle, this sets the previous string
@@ -86,6 +79,11 @@ def export(cssPath):
         cssFile.write(element["name"] + "{") # Write the parent, followed by a { bracket
 
         for child in element["children"]: # Go through each child in the elements children.
+            var, tok = Variable.processVariable(child)
+            tok = list(tok)
+            child = (var + ":" + tok[0])
+            if tok[1] != None: # A lot of variables don't have an extension, so lets see if it does.
+                child += tok[1]
             cssFile.write(child + ";") # Write the children (variables)
 
         cssFile.write("}") # Close the parent.
